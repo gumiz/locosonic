@@ -1,0 +1,59 @@
+<html>
+<head>
+	<title>Locosonic app link</title>
+	<link rel="shortcut icon" href="#">
+	<link rel="stylesheet" href="bootstrap.min.css">
+	<script src="jquery-3.2.1.slim.min.js"></script>
+	<script src="bootstrap.min.js"></script>
+</head>
+
+<body>
+
+	<div class="jumbotron">
+		<h1 class="display-4">Locosonic</h1>
+		<p>Insturctions for desktop version will go here on how to run the app.</p>
+		<p>Direct link for the magazinescape: <a id="linkUrl"></a></p>
+		<br/>
+		<div class="alert alert-dark" role="alert">*opening via phone's browser should automatically redirect to our application</div>
+	</div>
+</body>
+
+<script>
+	var getUrl = function() {
+		const baseUrl = 'https://go.locosonic.com/';
+		var link = new URL(window.location.href).searchParams.get("link");
+		if (link == null)
+			link = '0fxSulAVhlb' //magazines list link
+		return baseUrl + link;
+	};
+
+	(function() {
+		var url = getUrl();
+		var link = document.getElementById('linkUrl');
+		link.textContent = url;
+		link.setAttribute('href', url);
+		if (isMobileBrowser()) {
+		  window.location.href = url;
+		}
+	})();
+	
+	function isMobileBrowser() {
+	  // Regular expressions for common mobile browser keywords
+	  const mobileKeywords = [
+		'Android',
+		'webOS',
+		'iPhone',
+		'iPad',
+		'iPod',
+		'BlackBerry',
+		'Windows Phone',
+	  ];
+
+	  // Check if the user agent string contains any of the mobile keywords
+	  const userAgent = navigator.userAgent;
+	  return mobileKeywords.some(keyword => userAgent.includes(keyword));
+	}
+	
+</script>
+
+</html>
